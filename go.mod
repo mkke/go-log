@@ -1,1 +1,1 @@
-module "github.com/mkke/log"
+module "github.com/mkke/go-log"
