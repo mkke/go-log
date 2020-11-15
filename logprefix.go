@@ -1,5 +1,7 @@
 package mlog
 
+import "fmt"
+
 type PrefixedLogger struct {
 	Prefix   string
 	Previous Logger
@@ -13,7 +15,7 @@ func WithPrefix(prefix string, previous Logger) Logger {
 }
 
 func (p PrefixedLogger) Print(v ...interface{}) {
-	p.Previous.Printf("%s: %v", p.Prefix, v)
+	p.Previous.Print(p.Prefix + ": " + fmt.Sprint(v))
 }
 
 func (p PrefixedLogger) Printf(format string, v ...interface{}) {
@@ -21,5 +23,5 @@ func (p PrefixedLogger) Printf(format string, v ...interface{}) {
 }
 
 func (p PrefixedLogger) Println(v ...interface{}) {
-	p.Previous.Printf("%s: %v\n", p.Prefix, v)
+	p.Previous.Println(p.Prefix + ": " + fmt.Sprint(v))
 }
