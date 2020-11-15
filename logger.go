@@ -1,4 +1,4 @@
-package log
+package mlog
 
 // Log interface
 type Logger interface {
