@@ -1,6 +1,6 @@
 package mlog
 
-// Log interface
+// log interface
 type Logger interface {
 	// Print calls Output to print to the standard logger.
 	// Arguments are handled in the manner of fmt.Print.
