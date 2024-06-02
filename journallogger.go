@@ -18,7 +18,7 @@ var (
 func NewJournalLogger() *JournalLogger {
 	// journal has its own timestamps
 	logger := log.New(os.Stderr, "", 0)
-	logger.SetOutput(&syncLogWriter{})
+	logger.SetOutput(&SyncLogWriter{})
 	return &JournalLogger{Logger: logger}
 }
 
