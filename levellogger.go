@@ -1,6 +1,10 @@
 package mlog
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 // Level defines log levels, corresponding to systemd/sd-daemon levels
 // (see https://www.freedesktop.org/software/systemd/man/latest/sd-daemon.html).
@@ -8,6 +12,52 @@ type Level int
 
 func (l Level) Prefix() string {
 	return "<" + strconv.Itoa(int(l)) + ">"
+}
+
+func ParseLevel(s string) (Level, error) {
+	switch strings.ToLower(s) {
+	case "emergency":
+		return LevelEmergency, nil
+	case "alert":
+		return LevelAlert, nil
+	case "critical":
+		return LevelCritical, nil
+	case "error":
+		return LevelError, nil
+	case "warning":
+		return LevelWarning, nil
+	case "notice":
+		return LevelNotice, nil
+	case "info":
+		return LevelInfo, nil
+	case "debug":
+		return LevelDebug, nil
+	default:
+		return 0, fmt.Errorf("invalid log level: %s", s)
+	}
+}
+
+func (l Level) String() string {
+	switch l {
+	case LevelEmergency:
+		return "emergency"
+	case LevelAlert:
+		return "alert"
+	case LevelCritical:
+		return "critical"
+	case LevelError:
+		return "error"
+	case LevelWarning:
+		return "warning"
+	case LevelNotice:
+		return "notice"
+	case LevelInfo:
+		return "info"
+	case LevelDebug:
+		return "debug"
+	default:
+		return l.Prefix()
+	}
 }
 
 const (
